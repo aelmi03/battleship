@@ -1,0 +1,30 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "Battleship game",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aelmi03/battleship.git"
+  },
+  "keywords": [
+    "battleship"
+  ],
+  "author": "Abdi Elmi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aelmi03/battleship/issues"
+  },
+  "homepage": "https://github.com/aelmi03/battleship#readme",
+  "devDependencies": {
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.5.0"
+  }
+}
