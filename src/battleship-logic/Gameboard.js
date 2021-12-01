@@ -83,10 +83,19 @@ export default function GameBoard() {
       ship.hit(position);
     }
   }
+  function allShipsAreSunk() {
+    for (let i = 0; i < ships.length; i += 1) {
+      if (!ships[i].isSunk()) {
+        return false;
+      }
+    }
+    return true;
+  }
   return {
     placeShip,
     missedCoordinates,
     coordinates,
     receiveAttack,
+    allShipsAreSunk,
   };
 }

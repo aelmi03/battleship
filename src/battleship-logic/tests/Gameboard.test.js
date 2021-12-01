@@ -63,7 +63,7 @@ describe('Gameboard', () => {
     gameBoard.receiveAttack(8, 0);
     expect(gameBoard.coordinates[5][0][0].isSunk()).toBe(true);
   });
-  test.skip("Gameboard is able to know when all of it's ships are sunk with just one ship", () => {
+  test("Gameboard is able to know when all of it's ships are sunk with just one ship", () => {
     gameBoard.placeShip([3, 0], [3, 1], [3, 2]);
     gameBoard.receiveAttack(3, 0);
     gameBoard.receiveAttack(3, 1);
@@ -72,7 +72,7 @@ describe('Gameboard', () => {
     expect(gameBoard.allShipsAreSunk()).toBe(true);
   });
 
-  test.skip("Gameboard is able to know when all of it's ships are sunk with multiple ships", () => {
+  test("Gameboard is able to know when all of it's ships are sunk with multiple ships", () => {
     gameBoard.placeShip([0, 0], [0, 1], [0, 2]);
     gameBoard.placeShip([1, 0], [2, 0], [3, 0]);
     gameBoard.receiveAttack(0, 0);
