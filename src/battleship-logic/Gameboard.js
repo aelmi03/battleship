@@ -58,5 +58,35 @@ export default function GameBoard() {
       coordinates[firstCoordinate][secondCoordinate] = [newShip, i];
     }
   }
-  return { placeShip, missedCoordinates, coordinates };
+  function attackingCoordinateAreInRange(firstCoordinate, secondCoordinate) {
+    if (
+      // eslint-disable-next-line operator-linebreak
+      firstCoordinate > 9 ||
+      // eslint-disable-next-line operator-linebreak
+      firstCoordinate < 0 ||
+      // eslint-disable-next-line operator-linebreak
+      secondCoordinate > 9 ||
+      secondCoordinate < 0
+    ) {
+      return false;
+    }
+    return true;
+  }
+  function receiveAttack(firstCoordinate, secondCoordinate) {
+    if (!attackingCoordinateAreInRange(firstCoordinate, secondCoordinate)) {
+      return;
+    }
+    if (coordinates[firstCoordinate][secondCoordinate] === undefined) {
+      missedCoordinates.push([firstCoordinate, secondCoordinate]);
+    } else {
+      const [ship, position] = coordinates[firstCoordinate][secondCoordinate];
+      ship.hit(position);
+    }
+  }
+  return {
+    placeShip,
+    missedCoordinates,
+    coordinates,
+    receiveAttack,
+  };
 }

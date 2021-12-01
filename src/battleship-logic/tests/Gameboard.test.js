@@ -47,15 +47,15 @@ describe('Gameboard', () => {
     gameBoard.receiveAttack(0, 0);
     expect(gameBoard.missedCoordinates[0]).toEqual([0, 0]);
     gameBoard.receiveAttack(4, 0);
-    expect(gameBoard.missedCoordinates[0]).toEqual([4, 0]);
+    expect(gameBoard.missedCoordinates[1]).toEqual([4, 0]);
   });
-  test.skip('The Gameboard is able to pass the coordinates of a hit to the appropriate ship', () => {
+  test('The Gameboard is able to pass the coordinates of a hit to the appropriate ship', () => {
     gameBoard.placeShip([9, 0], [9, 1], [9, 2]);
     gameBoard.receiveAttack(9, 0);
     expect(gameBoard.coordinates[9][0][0].isHit(0)).toBe(true);
     expect(gameBoard.coordinates[9][1][0].isHit(1)).toBe(false);
   });
-  test.skip('Gameboard is able to pass the correct coordinates of a hit multiple times', () => {
+  test('Gameboard is able to pass the correct coordinates of a hit multiple times', () => {
     gameBoard.placeShip([5, 0], [6, 0], [7, 0], [8, 0]);
     gameBoard.receiveAttack(5, 0);
     gameBoard.receiveAttack(6, 0);
