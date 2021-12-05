@@ -18,6 +18,20 @@ export default function Player(name) {
     attacks.push([firstCoordinate, secondCoordinate]);
     enemyGameboard.receiveAttack(firstCoordinate, secondCoordinate);
   }
+  function getANumberBetweenZeroAndNine() {
+    return Math.floor(Math.random() * 10);
+  }
+  function randomAttack(enemyGameboard) {
+    while (true) {
+      const firstCoord = getANumberBetweenZeroAndNine();
+      const secondCoord = getANumberBetweenZeroAndNine();
+      if (!hasAlreadyAttackedCoordinate(firstCoord, secondCoord)) {
+        attacks.push([firstCoord, secondCoord]);
+        enemyGameboard.receiveAttack(firstCoord, secondCoord);
+        return;
+      }
+    }
+  }
   function getName() {
     return playerName;
   }
@@ -30,5 +44,6 @@ export default function Player(name) {
     gameBoard,
     attack,
     attacks,
+    randomAttack,
   };
 }

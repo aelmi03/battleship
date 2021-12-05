@@ -34,7 +34,11 @@ describe('Player', () => {
     secondPlayer.gameBoard.placeShip([1, 0], [2, 0], [3, 0]);
     secondPlayer.gameBoard.placeShip([4, 0], [5, 0], [6, 0]);
     secondPlayer.gameBoard.placeShip([7, 0], [7, 1], [7, 2]);
-    secondPlayer.gameBoard.placeShip([9, 7], [9, 8], [9, 9]);
+    secondPlayer.gameBoard.placeShip([7, 7], [7, 8], [7, 9]);
+    secondPlayer.gameBoard.placeShip([8, 7], [8, 8], [8, 9]);
+    secondPlayer.gameBoard.placeShip([4, 3], [4, 4], [4, 5]);
+    secondPlayer.gameBoard.placeShip([3, 7], [3, 8], [3, 9]);
+
     for (let i = 0; i < 100; i += 1) {
       firstPlayer.randomAttack(secondPlayer.gameBoard);
     }
