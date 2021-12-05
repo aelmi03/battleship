@@ -12,7 +12,7 @@ describe('Player', () => {
     firstPlayer.setName('First Player');
     expect(firstPlayer.getName()).toBe('First Player');
   });
-  test('Player is able to properly attack a ship', () => {
+  test.skip('Player is able to properly attack a ship', () => {
     secondPlayer.gameBoard.placeShip([0, 0], [0, 1], [0, 2]);
     firstPlayer.attack([0, 0], secondPlayer.gameBoard);
     expect(secondPlayer.gameBoard.coordinates[0][0][0].isHit(0)).toBe(true);
@@ -21,7 +21,7 @@ describe('Player', () => {
     firstPlayer.attack([0, 2], secondPlayer.gameBoard);
     expect(secondPlayer.gameBoard.allShipsAreSunk()).toBe(true);
   });
-  test('Player is able to record their attacks and will not record duplicates', () => {
+  test.skip('Player is able to record their attacks and will not record duplicates', () => {
     secondPlayer.gameBoard.placeShip([2, 0], [2, 1], [2, 2]);
     firstPlayer.attack([2, 0], secondPlayer.gameBoard);
     firstPlayer.attack([2, 0], secondPlayer.gameBoard);
@@ -29,7 +29,7 @@ describe('Player', () => {
     firstPlayer.randomAttack(secondPlayer.gameBoard);
     expect(firstPlayer.attacks.length).toBe(2);
   });
-  test('Player is able to randomly attack an enemy ship properly', () => {
+  test.skip('Player is able to randomly attack an enemy ship properly', () => {
     secondPlayer.gameBoard.placeShip([0, 0], [0, 1], [0, 2]);
     secondPlayer.gameBoard.placeShip([1, 0], [2, 0], [3, 0]);
     secondPlayer.gameBoard.placeShip([4, 0], [5, 0], [6, 0]);
