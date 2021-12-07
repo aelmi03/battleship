@@ -102,7 +102,74 @@ export default function GameBoard() {
     }
     console.log(string);
   }
+  function getRandomInt(num) {
+    return Math.floor(Math.random() * num);
+  }
 
+  function checkHorizontalAvailability(
+    [firstCoordinate, secondCoordinate],
+    length
+  ) {
+    if (secondCoordinate + (length - 1) > 9) return false;
+    for (let i = 0; i < length; i += 1) {
+      if (coordinates[firstCoordinate][secondCoordinate + i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function checkVerticalAvailability(
+    [firstCoordinate, secondCoordinate],
+    length
+  ) {
+    if (firstCoordinate + (length - 1) > 9) return false;
+    for (let i = 0; i < length; i += 1) {
+      if (coordinates[firstCoordinate + i][secondCoordinate]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function placeShipVertically([firstCoordinate, secondCoordinate], length) {
+    const shipCoordinates = [];
+    for (let i = 0; i < length; i += 1) {
+      shipCoordinates.push([firstCoordinate + i, secondCoordinate]);
+    }
+    console.log(shipCoordinates);
+    placeShip(...shipCoordinates);
+  }
+  function placeShipHorizontally([firstCoordinate, secondCoordinate], length) {
+    const shipCoordinates = [];
+    for (let i = 0; i < length; i += 1) {
+      shipCoordinates.push([firstCoordinate, secondCoordinate + i]);
+    }
+    console.log(shipCoordinates);
+    placeShip(...shipCoordinates);
+  }
+  function placeShipRandomly(length) {
+    if (length > 10 || length <= 0) return;
+    const direction =
+      (getRandomInt(6) + 1) % 2 === 0 ? 'vertical' : 'horizontal';
+    while (true) {
+      const firstCoord = getRandomInt(10);
+      const secondCoord = getRandomInt(10);
+      if (direction === 'vertical') {
+        if (!checkVerticalAvailability([firstCoord, secondCoord], length)) {
+          continue;
+        }
+        placeShipVertically([firstCoord, secondCoord], length);
+        break;
+      } else {
+        if (!checkHorizontalAvailability([firstCoord, secondCoord], length)) {
+          continue;
+        }
+        placeShipHorizontally([firstCoord, secondCoord], length);
+        break;
+      }
+    }
+  }
   return {
     placeShip,
     missedCoordinates,
@@ -110,5 +177,7 @@ export default function GameBoard() {
     receiveAttack,
     allShipsAreSunk,
     printShipToConsole,
+    placeShipRandomly,
+    ships,
   };
 }

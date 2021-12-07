@@ -87,4 +87,13 @@ describe('Gameboard', () => {
     expect(gameBoard.coordinates[1][0][0].isSunk()).toBe(true);
     expect(gameBoard.allShipsAreSunk()).toBe(true);
   });
+  test('Gameboard is able to randomly place a ship', () => {
+    gameBoard.placeShipRandomly(5);
+    gameBoard.placeShipRandomly(4);
+    gameBoard.placeShipRandomly(3);
+    gameBoard.placeShipRandomly(2);
+    gameBoard.placeShipRandomly(1);
+    gameBoard.printShipToConsole();
+    expect(gameBoard.ships.length).toBe(5);
+  });
 });
