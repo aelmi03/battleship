@@ -2,7 +2,7 @@ import Ship from './Ship';
 
 export default function GameBoard() {
   const ships = [];
-  const coordinates = [[], [], [], [], [], [], [], [], [], [], []];
+  const coordinates = [[], [], [], [], [], [], [], [], [], []];
   const missedCoordinates = [];
   function coordinatesAreInRange(shipCoordinates) {
     for (let i = 0; i < shipCoordinates.length; i += 1) {
@@ -91,11 +91,24 @@ export default function GameBoard() {
     }
     return true;
   }
+
+  function printShipToConsole() {
+    let string = '';
+    for (let i = 0; i < coordinates.length; i += 1) {
+      for (let j = 0; j < coordinates.length; j += 1) {
+        string += coordinates[i][j] ? 'X ' : 'O ';
+      }
+      string += '\n';
+    }
+    console.log(string);
+  }
+
   return {
     placeShip,
     missedCoordinates,
     coordinates,
     receiveAttack,
     allShipsAreSunk,
+    printShipToConsole,
   };
 }

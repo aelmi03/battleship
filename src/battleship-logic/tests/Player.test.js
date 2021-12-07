@@ -23,6 +23,8 @@ describe('Player', () => {
   });
   test('Player is able to record their attacks and will not record duplicates', () => {
     secondPlayer.gameBoard.placeShip([2, 0], [2, 1], [2, 2]);
+    secondPlayer.gameBoard.printShipToConsole();
+
     firstPlayer.attack([2, 0], secondPlayer.gameBoard);
     firstPlayer.attack([2, 0], secondPlayer.gameBoard);
     expect(firstPlayer.attacks.length).toBe(1);
@@ -38,7 +40,7 @@ describe('Player', () => {
     secondPlayer.gameBoard.placeShip([8, 7], [8, 8], [8, 9]);
     secondPlayer.gameBoard.placeShip([4, 3], [4, 4], [4, 5]);
     secondPlayer.gameBoard.placeShip([3, 7], [3, 8], [3, 9]);
-
+    secondPlayer.gameBoard.printShipToConsole();
     for (let i = 0; i < 100; i += 1) {
       firstPlayer.randomAttack(secondPlayer.gameBoard);
     }
