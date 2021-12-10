@@ -23,6 +23,7 @@
   "homepage": "https://github.com/aelmi03/battleship#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.16.4",
+    "css-loader": "^6.5.1",
     "eslint": "^7.1.9",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.3.0",
