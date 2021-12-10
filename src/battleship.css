@@ -1,6 +1,7 @@
 body {
   min-width: 100vw;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
 header {
@@ -10,4 +11,59 @@ header {
   font-size: 2.2rem;
   color: white;
   background-color: black;
+}
+
+.battleship {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-auto-rows: 16px;
+  width: 160px;
+}
+
+.battleship-spot {
+  border: 1px solid black;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  margin-top: 5rem;
+}
+.options {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.switch-direction {
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+  font-weight: bold;
+}
+
+.ships-to-place {
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  width: 10rem;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  border: 1px solid black;
+}
+
+.ship {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.ship-position {
+  width: 15px;
+  border: 1px solid black;
+  height: 15px;
+}
+
+h2 {
+  font-size: 1.4rem;
 }
