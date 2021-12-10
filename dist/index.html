@@ -116,36 +116,43 @@
       </div>
       <div class="options">
         <h2>Place Your Ships!</h2>
-        <button class="switch-direction">Switch Direction Of Ships</button>
+        <button class="switch-direction">Switch Direction</button>
         <div class="ships-to-place">
-          <div class="ship">
+          <div class="ship" draggable="true">
             <div class="ship-position"></div>
             <div class="ship-position"></div>
             <div class="ship-position"></div>
             <div class="ship-position"></div>
             <div class="ship-position"></div>
           </div>
-          <div class="ship">
+          <div class="ship" draggable="true">
             <div class="ship-position"></div>
             <div class="ship-position"></div>
             <div class="ship-position"></div>
             <div class="ship-position"></div>
           </div>
-          <div class="ship">
+          <div class="ship" draggable="true">
             <div class="ship-position"></div>
             <div class="ship-position"></div>
             <div class="ship-position"></div>
           </div>
-          <div class="ship">
+          <div class="ship" draggable="true">
             <div class="ship-position"></div>
             <div class="ship-position"></div>
           </div>
-          <div class="ship">
+          <div class="ship" draggable="true">
             <div class="ship-position"></div>
             <div class="ship-position"></div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="start-game-container">
+      <form action="#" novalidate>
+        <label for="player-name">Name:</label>
+        <input type="text" name="player-name" id="player-name" required />
+      </form>
+      <button class="start-game">Start Game!</button>
     </div>
   </body>
 </html>
