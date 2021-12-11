@@ -68,14 +68,50 @@ function createPreGameOptions() {
   );
   return optionsDiv;
 }
-
+function createFormElement() {
+  const form = document.createElement('form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+  });
+  const label = document.createElement('label');
+  label.setAttribute('for', 'player-name');
+  label.textContent = 'Name:';
+  const input = document.createElement('input');
+  input.setAttribute('type', 'text');
+  input.setAttribute('name', 'player-name');
+  input.setAttribute('id', 'player-name');
+  input.setAttribute('required', '');
+  appendAllChildren([label, input], form);
+  return form;
+}
+function createNameAndStartGameComponents() {
+  const startGameContainer = document.createElement('div');
+  startGameContainer.classList.add('start-game-container');
+  const form = createFormElement();
+  const startButton = document.createElement('button');
+  startButton.classList.add('start-game');
+  startButton.textContent = 'Start Game!';
+  appendAllChildren([form, startButton], startGameContainer);
+  return startGameContainer;
+}
+/*
+<div class="start-game-container">
+    <form action="#" novalidate>
+      <label for="player-name">Name:</label>
+      <input type="text" name="player-name" id="player-name" required />
+    </form>
+    <button class="start-game">Start Game!</button>
+  </div>
+*/
 function createPreGameComponents(player) {
   const container = document.createElement('div');
   container.classList.add('container');
   const battleBoardComponent = createPreGameBattleBoard(player);
   const gameOptionsComponent = createPreGameOptions();
+  const nameAndStartGameComponent = createNameAndStartGameComponents();
   appendAllChildren([battleBoardComponent, gameOptionsComponent], container);
   document.body.appendChild(container);
+  document.body.appendChild(nameAndStartGameComponent);
 }
 Pubsub.subscribe('loadPreGame', createPreGameComponents);
 Pubsub.subscribe('updatePreGameBattleShip', createPreGameBattleBoard);
