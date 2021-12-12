@@ -31,7 +31,8 @@ function dropListener(e) {
     direction
   );
   if (humanPlayer.gameBoard.coordinatesAreAllowed(coordinates)) {
-    console.log(coordinates);
+    const shipDiv = document.querySelector(`#${nameAndLength[0]}`);
+    shipDiv.parentNode.removeChild(shipDiv);
     Pubsub.publish('User placed valid ship coordinates', coordinates);
   }
 }
@@ -66,11 +67,11 @@ function dragStart(shipDiv) {
   });
 }
 
-function createShipDiv(length) {
+function createShipDiv(length, shipID) {
   const mainShipDiv = document.createElement('div');
   mainShipDiv.classList.add('ship');
   mainShipDiv.setAttribute('draggable', 'true');
-  mainShipDiv.setAttribute('id', `Ship ${length}`);
+  mainShipDiv.setAttribute('id', `${shipID}`);
   mainShipDiv.setAttribute('length', `${length}`);
 
   dragStart(mainShipDiv);
@@ -84,13 +85,13 @@ function createShipDiv(length) {
 function createShipsToPlaceDiv() {
   const shipPlacerDiv = document.createElement('div');
   shipPlacerDiv.classList.add('ships-to-place');
-  const carrierDiv = createShipDiv(5);
-  const battleShipDiv = createShipDiv(4);
-  const cruiserDiv = createShipDiv(3);
-  const destroyerDiv = createShipDiv(2);
-  const secondDestroyerDiv = createShipDiv(2);
+  const carrierDiv = createShipDiv(5, 'Carrier');
+  const battleShipDiv = createShipDiv(4, 'Battleship');
+  const cruiserDiv = createShipDiv(3, 'Cruiser');
+  const destroyerDiv = createShipDiv(2, 'Destroyer');
+  const submarineDiv = createShipDiv(2, 'Submarine');
   appendAllChildren(
-    [carrierDiv, battleShipDiv, cruiserDiv, destroyerDiv, secondDestroyerDiv],
+    [carrierDiv, battleShipDiv, cruiserDiv, destroyerDiv, submarineDiv],
     shipPlacerDiv
   );
   return shipPlacerDiv;
