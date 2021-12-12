@@ -1,9 +1,16 @@
 import Ship from './Ship';
 
-export default function GameBoard() {
+export default function GameBoard(battleshipName) {
+  const name = battleshipName;
   const ships = [];
   const coordinates = [[], [], [], [], [], [], [], [], [], []];
   const missedCoordinates = [];
+  function getName() {
+    return name;
+  }
+  function setName(newName) {
+    name = newName;
+  }
   function coordinatesAreInRange(shipCoordinates) {
     for (let i = 0; i < shipCoordinates.length; i += 1) {
       // eslint-disable-next-line prefer-destructuring
@@ -108,7 +115,7 @@ export default function GameBoard() {
 
   function checkHorizontalAvailability(
     [firstCoordinate, secondCoordinate],
-    length,
+    length
   ) {
     if (secondCoordinate + (length - 1) > 9) return false;
     for (let i = 0; i < length; i += 1) {
@@ -121,7 +128,7 @@ export default function GameBoard() {
 
   function checkVerticalAvailability(
     [firstCoordinate, secondCoordinate],
-    length,
+    length
   ) {
     if (firstCoordinate + (length - 1) > 9) return false;
     for (let i = 0; i < length; i += 1) {
@@ -162,7 +169,8 @@ export default function GameBoard() {
   }
   function placeShipRandomly(length) {
     if (length > 10 || length <= 0) return;
-    const direction =      (getRandomInt(6) + 1) % 2 === 0 ? 'vertical' : 'horizontal';
+    const direction =
+      (getRandomInt(6) + 1) % 2 === 0 ? 'vertical' : 'horizontal';
     while (true) {
       const firstCoord = getRandomInt(10);
       const secondCoord = getRandomInt(10);
@@ -192,5 +200,7 @@ export default function GameBoard() {
     ships,
     coordinatesAreAllowed,
     getCoordinates,
+    setName,
+    getName,
   };
 }

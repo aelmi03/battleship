@@ -15,7 +15,6 @@ function switchDirectionOfShips(e) {
     ships.forEach((ship) => (ship.style.flexFlow = 'row wrap'));
     e.target.textContent = 'Horizontal';
   }
-  console.log('hello');
 }
 function makeValidDragSpot(e) {
   e.preventDefault();
@@ -26,23 +25,18 @@ function dropListener(e) {
   const direction = document.querySelector('.switch-direction').textContent;
   const xCoord = +e.target.getAttribute('x-position');
   const yCoord = +e.target.getAttribute('y-position');
-  console.log(humanPlayer);
   const coordinates = humanPlayer.gameBoard.getCoordinates(
     [xCoord, yCoord],
     nameAndLength[1],
     direction
   );
-  console.log(coordinates);
-
-  console.log(
-    `${e.target.getAttribute('x-position')} ${e.target.getAttribute(
-      'y-position'
-    )} `
-  );
+  if (humanPlayer.gameBoard.coordinatesAreAllowed(coordinates)) {
+    console.log(coordinates);
+    Pubsub.publish('User placed valid ship coordinates', coordinates);
+  }
 }
-function createPreGameBattleBoard(player) {
-  const battleShipDiv = document.createElement('div');
-  battleShipDiv.classList.add('battleship');
+function createPreGameBattleBoard(player, battleShipDiv) {
+  battleShipDiv.textContent = '';
   for (let i = 0; i < 10; i += 1) {
     for (let j = 0; j < 10; j += 1) {
       const battleShipCoordinate = document.createElement('div');
@@ -58,7 +52,10 @@ function createPreGameBattleBoard(player) {
       battleShipDiv.appendChild(battleShipCoordinate);
     }
   }
-  return battleShipDiv;
+}
+function updatePreGameBattleShip(player) {
+  const battleShipComponent = document.querySelector('.battleship');
+  createPreGameBattleBoard(player, battleShipComponent);
 }
 function dragStart(shipDiv) {
   shipDiv.addEventListener('dragstart', (e) => {
@@ -87,19 +84,13 @@ function createShipDiv(length) {
 function createShipsToPlaceDiv() {
   const shipPlacerDiv = document.createElement('div');
   shipPlacerDiv.classList.add('ships-to-place');
-  const shipOfLengthFiveDiv = createShipDiv(5);
-  const shipOfLengthFourDiv = createShipDiv(4);
-  const shipOfLengthThreeDiv = createShipDiv(3);
-  const shipOfLengthTwoDiv = createShipDiv(2);
-  const secondShipOfLengthTwoDiv = createShipDiv(2);
+  const carrierDiv = createShipDiv(5);
+  const battleShipDiv = createShipDiv(4);
+  const cruiserDiv = createShipDiv(3);
+  const destroyerDiv = createShipDiv(2);
+  const secondDestroyerDiv = createShipDiv(2);
   appendAllChildren(
-    [
-      shipOfLengthFiveDiv,
-      shipOfLengthFourDiv,
-      shipOfLengthThreeDiv,
-      shipOfLengthTwoDiv,
-      secondShipOfLengthTwoDiv,
-    ],
+    [carrierDiv, battleShipDiv, cruiserDiv, destroyerDiv, secondDestroyerDiv],
     shipPlacerDiv
   );
   return shipPlacerDiv;
@@ -122,6 +113,7 @@ function createPreGameOptions() {
 }
 function createFormElement() {
   const form = document.createElement('form');
+  form.setAttribute('novalidate', '');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
   });
@@ -146,19 +138,13 @@ function createNameAndStartGameComponents() {
   appendAllChildren([form, startButton], startGameContainer);
   return startGameContainer;
 }
-/*
-<div class="start-game-container">
-    <form action="#" novalidate>
-      <label for="player-name">Name:</label>
-      <input type="text" name="player-name" id="player-name" required />
-    </form>
-    <button class="start-game">Start Game!</button>
-  </div>
-*/
+
 function createPreGameComponents(player) {
   const container = document.createElement('div');
   container.classList.add('container');
-  const battleBoardComponent = createPreGameBattleBoard(player);
+  const battleBoardComponent = document.createElement('div');
+  battleBoardComponent.classList.add('battleship');
+  createPreGameBattleBoard(player, battleBoardComponent);
   const gameOptionsComponent = createPreGameOptions();
   const nameAndStartGameComponent = createNameAndStartGameComponents();
   appendAllChildren([battleBoardComponent, gameOptionsComponent], container);
@@ -166,4 +152,4 @@ function createPreGameComponents(player) {
   document.body.appendChild(nameAndStartGameComponent);
 }
 Pubsub.subscribe('loadPreGame', createPreGameComponents);
-Pubsub.subscribe('updatePreGameBattleShip', createPreGameBattleBoard);
+Pubsub.subscribe('updatePreGameBattleShip', updatePreGameBattleShip);
