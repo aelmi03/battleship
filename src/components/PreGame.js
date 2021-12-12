@@ -1,9 +1,44 @@
 import Pubsub from '../battleship-logic/Pubsub';
+import { humanPlayer } from '../battleship-logic/BattleShipController';
 
 function appendAllChildren(arrayOfChildrenDivs, parentDiv) {
   for (let i = 0; i < arrayOfChildrenDivs.length; i += 1) {
     parentDiv.appendChild(arrayOfChildrenDivs[i]);
   }
+}
+function switchDirectionOfShips(e) {
+  const ships = document.querySelectorAll('.ship');
+  if (e.target.textContent === 'Horizontal') {
+    ships.forEach((ship) => (ship.style.flexFlow = 'column wrap'));
+    e.target.textContent = 'Vertical';
+  } else {
+    ships.forEach((ship) => (ship.style.flexFlow = 'row wrap'));
+    e.target.textContent = 'Horizontal';
+  }
+  console.log('hello');
+}
+function makeValidDragSpot(e) {
+  e.preventDefault();
+}
+function dropListener(e) {
+  e.preventDefault();
+  const nameAndLength = String(e.dataTransfer.getData('text/plain')).split(' ');
+  const direction = document.querySelector('.switch-direction').textContent;
+  const xCoord = +e.target.getAttribute('x-position');
+  const yCoord = +e.target.getAttribute('y-position');
+  console.log(humanPlayer);
+  const coordinates = humanPlayer.gameBoard.getCoordinates(
+    [xCoord, yCoord],
+    nameAndLength[1],
+    direction
+  );
+  console.log(coordinates);
+
+  console.log(
+    `${e.target.getAttribute('x-position')} ${e.target.getAttribute(
+      'y-position'
+    )} `
+  );
 }
 function createPreGameBattleBoard(player) {
   const battleShipDiv = document.createElement('div');
@@ -11,6 +46,9 @@ function createPreGameBattleBoard(player) {
   for (let i = 0; i < 10; i += 1) {
     for (let j = 0; j < 10; j += 1) {
       const battleShipCoordinate = document.createElement('div');
+      battleShipCoordinate.addEventListener('dragenter', makeValidDragSpot);
+      battleShipCoordinate.addEventListener('dragover', makeValidDragSpot);
+      battleShipCoordinate.addEventListener('drop', dropListener);
       battleShipCoordinate.classList.add('battleship-spot');
       battleShipCoordinate.setAttribute('x-position', i);
       battleShipCoordinate.setAttribute('y-position', j);
@@ -22,10 +60,23 @@ function createPreGameBattleBoard(player) {
   }
   return battleShipDiv;
 }
+function dragStart(shipDiv) {
+  shipDiv.addEventListener('dragstart', (e) => {
+    e.dataTransfer.setData(
+      'text/plain',
+      `${e.target.id} ${shipDiv.getAttribute('length')}`
+    );
+  });
+}
+
 function createShipDiv(length) {
   const mainShipDiv = document.createElement('div');
   mainShipDiv.classList.add('ship');
   mainShipDiv.setAttribute('draggable', 'true');
+  mainShipDiv.setAttribute('id', `Ship ${length}`);
+  mainShipDiv.setAttribute('length', `${length}`);
+
+  dragStart(mainShipDiv);
   for (let i = 0; i < length; i += 1) {
     const shipPositionDiv = document.createElement('div');
     shipPositionDiv.classList.add('ship-position');
@@ -59,8 +110,9 @@ function createPreGameOptions() {
   const placeShipsHeader = document.createElement('h2');
   placeShipsHeader.textContent = 'Place Your Ships!';
   const switchDirectionButton = document.createElement('button');
+  switchDirectionButton.addEventListener('click', switchDirectionOfShips);
   switchDirectionButton.classList.add('switch-direction');
-  switchDirectionButton.textContent = 'Switch Direction';
+  switchDirectionButton.textContent = 'Horizontal';
   const shipsToPlaceDiv = createShipsToPlaceDiv();
   appendAllChildren(
     [placeShipsHeader, switchDirectionButton, shipsToPlaceDiv],

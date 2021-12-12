@@ -96,4 +96,10 @@ describe('Gameboard', () => {
     gameBoard.printShipToConsole();
     expect(gameBoard.ships.length).toBe(5);
   });
+  test('getCoordinates function works properly', () => {
+    expect(gameBoard.getCoordinates([0, 0], 2, 'Vertical')).toEqual([
+      [0, 0],
+      [1, 0],
+    ]);
+  });
 });

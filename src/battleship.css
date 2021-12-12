@@ -1,7 +1,11 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 body {
   min-width: 100vw;
   min-height: 100vh;
-  box-sizing: border-box;
 }
 
 header {
@@ -23,7 +27,9 @@ header {
 .battleship-spot {
   border: 1px solid black;
 }
-
+.battleship-spot:hover {
+  background-color: red;
+}
 .container {
   display: flex;
   justify-content: center;
@@ -57,14 +63,15 @@ header {
 }
 
 .ship {
+  height: fit-content;
   display: flex;
   flex-flow: row nowrap;
 }
 .ship-position {
   background-color: chocolate;
-  width: 15px;
+  width: 16px;
   border: 1px solid black;
-  height: 15px;
+  height: 16px;
 }
 .start-game-container {
   margin-top: 3rem;

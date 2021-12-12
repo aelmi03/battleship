@@ -108,7 +108,7 @@ export default function GameBoard() {
 
   function checkHorizontalAvailability(
     [firstCoordinate, secondCoordinate],
-    length
+    length,
   ) {
     if (secondCoordinate + (length - 1) > 9) return false;
     for (let i = 0; i < length; i += 1) {
@@ -121,7 +121,7 @@ export default function GameBoard() {
 
   function checkVerticalAvailability(
     [firstCoordinate, secondCoordinate],
-    length
+    length,
   ) {
     if (firstCoordinate + (length - 1) > 9) return false;
     for (let i = 0; i < length; i += 1) {
@@ -131,7 +131,19 @@ export default function GameBoard() {
     }
     return true;
   }
-
+  function getCoordinates(coords, length, direction) {
+    const arrayOfCoordinates = [];
+    if (direction === 'Vertical') {
+      for (let i = 0; i < length; i += 1) {
+        arrayOfCoordinates.push([coords[0] + i, coords[1]]);
+      }
+    } else {
+      for (let i = 0; i < length; i += 1) {
+        arrayOfCoordinates.push([coords[0], coords[1] + i]);
+      }
+    }
+    return arrayOfCoordinates;
+  }
   function placeShipVertically([firstCoordinate, secondCoordinate], length) {
     const shipCoordinates = [];
     for (let i = 0; i < length; i += 1) {
@@ -150,8 +162,7 @@ export default function GameBoard() {
   }
   function placeShipRandomly(length) {
     if (length > 10 || length <= 0) return;
-    const direction =
-      (getRandomInt(6) + 1) % 2 === 0 ? 'vertical' : 'horizontal';
+    const direction =      (getRandomInt(6) + 1) % 2 === 0 ? 'vertical' : 'horizontal';
     while (true) {
       const firstCoord = getRandomInt(10);
       const secondCoord = getRandomInt(10);
@@ -179,5 +190,7 @@ export default function GameBoard() {
     printShipToConsole,
     placeShipRandomly,
     ships,
+    coordinatesAreAllowed,
+    getCoordinates,
   };
 }
