@@ -1,11 +1,13 @@
 import Pubsub from '../battleship-logic/Pubsub';
 import { humanPlayer } from '../battleship-logic/BattleShipController';
 
+let currentDraggedShipLength = null;
 function appendAllChildren(arrayOfChildrenDivs, parentDiv) {
   for (let i = 0; i < arrayOfChildrenDivs.length; i += 1) {
     parentDiv.appendChild(arrayOfChildrenDivs[i]);
   }
 }
+
 function switchDirectionOfShips(e) {
   const ships = document.querySelectorAll('.ship');
   if (e.target.textContent === 'Horizontal') {
@@ -23,10 +25,11 @@ function dropListener(e) {
   e.preventDefault();
   const nameAndLength = String(e.dataTransfer.getData('text/plain')).split(' ');
   const direction = document.querySelector('.switch-direction').textContent;
-  const xCoord = +e.target.getAttribute('x-position');
-  const yCoord = +e.target.getAttribute('y-position');
   const coordinates = humanPlayer.gameBoard.getCoordinates(
-    [xCoord, yCoord],
+    [
+      +e.target.getAttribute('x-position'),
+      +e.target.getAttribute('y-position'),
+    ],
     nameAndLength[1],
     direction
   );
@@ -36,13 +39,38 @@ function dropListener(e) {
     Pubsub.publish('User placed valid ship coordinates', coordinates);
   }
 }
+function markSpotsAsAvailable(coordinates) {
+  for (let i = 0; i < coordinates.length; i += 1) {
+    const battleBoardSpot = document.querySelector(
+      `[x-position = "${coordinates[i][0]}"][y-position = "${coordinates[i][1]}"]`
+    );
+    battleBoardSpot.classList.add('allowed');
+  }
+}
+function dragEnterListener(e) {
+  e.preventDefault();
+  const direction = document.querySelector('.switch-direction').textContent;
+  const coordinates = humanPlayer.gameBoard.getCoordinates(
+    [
+      +e.target.getAttribute('x-position'),
+      +e.target.getAttribute('y-position'),
+    ],
+    currentDraggedShipLength,
+    direction
+  );
+  if (humanPlayer.gameBoard.coordinatesAreAllowed(coordinates)) {
+    console.log(coordinates);
+    markSpotsAsAvailable(coordinates);
+  }
+}
 function createPreGameBattleBoard(player, battleShipDiv) {
   battleShipDiv.textContent = '';
   for (let i = 0; i < 10; i += 1) {
     for (let j = 0; j < 10; j += 1) {
       const battleShipCoordinate = document.createElement('div');
-      battleShipCoordinate.addEventListener('dragenter', makeValidDragSpot);
+      battleShipCoordinate.addEventListener('dragenter', dragEnterListener);
       battleShipCoordinate.addEventListener('dragover', makeValidDragSpot);
+      battleShipCoordinate.addEventListener('dragleave', dragLeaveListener);
       battleShipCoordinate.addEventListener('drop', dropListener);
       battleShipCoordinate.classList.add('battleship-spot');
       battleShipCoordinate.setAttribute('x-position', i);
@@ -64,6 +92,7 @@ function dragStart(shipDiv) {
       'text/plain',
       `${e.target.id} ${shipDiv.getAttribute('length')}`
     );
+    currentDraggedShipLength = shipDiv.getAttribute('length');
   });
 }
 
