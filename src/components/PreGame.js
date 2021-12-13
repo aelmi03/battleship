@@ -18,8 +18,30 @@ function switchDirectionOfShips(e) {
     e.target.textContent = 'Horizontal';
   }
 }
-function makeValidDragSpot(e) {
+function markSpotsAsAvailable(coordinates) {
+  for (let i = 0; i < coordinates.length; i += 1) {
+    const battleBoardSpot = document.querySelector(
+      `[x-position = "${coordinates[i][0]}"][y-position = "${coordinates[i][1]}"]`
+    );
+    battleBoardSpot.classList.add('allowed');
+    console.log(battleBoardSpot);
+  }
+}
+function dragOverListener(e) {
   e.preventDefault();
+  const direction = document.querySelector('.switch-direction').textContent;
+  const coordinates = humanPlayer.gameBoard.getCoordinates(
+    [
+      +e.target.getAttribute('x-position'),
+      +e.target.getAttribute('y-position'),
+    ],
+    currentDraggedShipLength,
+    direction
+  );
+  if (humanPlayer.gameBoard.coordinatesAreAllowed(coordinates)) {
+    console.log(coordinates);
+    markSpotsAsAvailable(coordinates);
+  }
 }
 function dropListener(e) {
   e.preventDefault();
@@ -39,29 +61,14 @@ function dropListener(e) {
     Pubsub.publish('User placed valid ship coordinates', coordinates);
   }
 }
-function markSpotsAsAvailable(coordinates) {
-  for (let i = 0; i < coordinates.length; i += 1) {
-    const battleBoardSpot = document.querySelector(
-      `[x-position = "${coordinates[i][0]}"][y-position = "${coordinates[i][1]}"]`
-    );
-    battleBoardSpot.classList.add('allowed');
-  }
-}
 function dragEnterListener(e) {
   e.preventDefault();
-  const direction = document.querySelector('.switch-direction').textContent;
-  const coordinates = humanPlayer.gameBoard.getCoordinates(
-    [
-      +e.target.getAttribute('x-position'),
-      +e.target.getAttribute('y-position'),
-    ],
-    currentDraggedShipLength,
-    direction
-  );
-  if (humanPlayer.gameBoard.coordinatesAreAllowed(coordinates)) {
-    console.log(coordinates);
-    markSpotsAsAvailable(coordinates);
-  }
+}
+function dragLeaveListener(e) {
+  const allHighlightedSpots = document.querySelectorAll('.allowed');
+  if (allHighlightedSpots.length === 0) return;
+  allHighlightedSpots.forEach((spot) => spot.classList.remove('allowed'));
+  console.log('left a spot');
 }
 function createPreGameBattleBoard(player, battleShipDiv) {
   battleShipDiv.textContent = '';
@@ -69,7 +76,7 @@ function createPreGameBattleBoard(player, battleShipDiv) {
     for (let j = 0; j < 10; j += 1) {
       const battleShipCoordinate = document.createElement('div');
       battleShipCoordinate.addEventListener('dragenter', dragEnterListener);
-      battleShipCoordinate.addEventListener('dragover', makeValidDragSpot);
+      battleShipCoordinate.addEventListener('dragover', dragOverListener);
       battleShipCoordinate.addEventListener('dragleave', dragLeaveListener);
       battleShipCoordinate.addEventListener('drop', dropListener);
       battleShipCoordinate.classList.add('battleship-spot');
