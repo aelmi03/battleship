@@ -1,6 +1,5 @@
 import Player from './Player';
 import Pubsub from './Pubsub';
-import '../components/PreGame';
 
 export const humanPlayer = Player('Player');
 const computerPlayer = Player('Computer');

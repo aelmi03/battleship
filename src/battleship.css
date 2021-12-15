@@ -89,7 +89,8 @@ form {
   padding: 0.5rem;
   font-size: 1rem;
 }
-.start-game {
+.start-game,
+.rematch-button {
   background-color: rgb(255, 123, 0);
   color: white;
   font-size: 1.2rem;
@@ -112,4 +113,24 @@ h2 {
 label {
   font-size: 1.3rem;
   font-weight: bold;
+}
+
+.game-container {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 4rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.battleship-container {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  gap: 2rem;
+}
+.rematch-button {
+  width: 10rem;
 }
