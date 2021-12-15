@@ -165,6 +165,14 @@ function createFormElement() {
   appendAllChildren([label, input], form);
   return form;
 }
+function startGame() {
+  if (humanPlayer.gameBoard.ships.length === 5) {
+    Pubsub.publish(
+      'User clicked start game',
+      document.querySelector('#player-name').value
+    );
+  }
+}
 function createNameAndStartGameComponents() {
   const startGameContainer = document.createElement('div');
   startGameContainer.classList.add('start-game-container');
@@ -172,13 +180,14 @@ function createNameAndStartGameComponents() {
   const startButton = document.createElement('button');
   startButton.classList.add('start-game');
   startButton.textContent = 'Start Game!';
+  startButton.addEventListener('click', startGame);
   appendAllChildren([form, startButton], startGameContainer);
   return startGameContainer;
 }
 
 function createPreGameComponents(player) {
   const container = document.createElement('div');
-  container.classList.add('container');
+  container.classList.add('pre-game-container');
   const battleBoardComponent = document.createElement('div');
   battleBoardComponent.classList.add('battleship');
   createPreGameBattleBoard(player, battleBoardComponent);
@@ -188,5 +197,14 @@ function createPreGameComponents(player) {
   document.body.appendChild(container);
   document.body.appendChild(nameAndStartGameComponent);
 }
+function destroyPreGame() {
+  const container = document.querySelector('.pre-game-container');
+  container.textContent = '';
+  const startGameContainer = document.querySelector('.start-game-container');
+  startGameContainer.textContent = '';
+  document.body.removeChild(startGameContainer);
+  document.body.removeChild(container);
+}
 Pubsub.subscribe('loadPreGame', createPreGameComponents);
 Pubsub.subscribe('updatePreGameBattleShip', updatePreGameBattleShip);
+Pubsub.subscribe('Destroy Pre-game Section', destroyPreGame);

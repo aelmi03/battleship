@@ -30,7 +30,7 @@ header {
 .battleship-spot:hover {
   background-color: rgb(253, 228, 1);
 }
-.container {
+.pre-game-container {
   display: flex;
   justify-content: center;
   gap: 0.7rem;
