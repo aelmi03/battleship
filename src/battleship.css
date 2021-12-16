@@ -116,7 +116,7 @@ label {
 }
 
 .game-container {
-  margin-top: 3.5rem;
+  margin-top: 2.5rem;
   display: flex;
   gap: 1.2rem;
   flex-flow: column nowrap;
@@ -124,7 +124,8 @@ label {
   align-items: center;
 }
 
-.battleship-container {
+.battleships-container {
+  margin-top: 0.5rem;
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
@@ -146,7 +147,11 @@ label {
   flex-flow: column nowrap;
   gap: 2rem;
 }
+.player-container {
+  pointer-events: none;
+}
 
 .game-over {
-  color: white;
+  color: black;
+  font-size: 2rem;
 }

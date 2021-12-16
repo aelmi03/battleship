@@ -46,4 +46,9 @@ describe('Player', () => {
     }
     expect(secondPlayer.gameBoard.allShipsAreSunk()).toBe(true);
   });
+  test('Player is able to return true or false on if it has attacked certain coordinates', () => {
+    expect(firstPlayer.hasHit(0, 0)).toBe(false);
+    firstPlayer.attack([0, 0], secondPlayer.gameBoard);
+    expect(firstPlayer.hasHit(0, 0)).toBe(true);
+  });
 });

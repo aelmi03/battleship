@@ -38,6 +38,16 @@ export default function Player(name) {
   function setName(newName) {
     playerName = newName;
   }
+  function hasHit(xCoord, yCoord) {
+    for (let i = 0; i < attacks.length; i += 1) {
+      const pairOfCoords = attacks[i];
+      const [xCoordinate, yCoordinate] = pairOfCoords;
+      if (xCoordinate === xCoord && yCoordinate === yCoord) {
+        return true;
+      }
+    }
+    return false;
+  }
   return {
     getName,
     setName,
@@ -45,5 +55,6 @@ export default function Player(name) {
     attack,
     attacks,
     randomAttack,
+    hasHit,
   };
 }

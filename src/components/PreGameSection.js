@@ -2,7 +2,7 @@ import Pubsub from '../battleship-logic/Pubsub';
 import { humanPlayer } from '../battleship-logic/BattleShipController';
 
 let currentDraggedShipLength = null;
-function appendAllChildren(arrayOfChildrenDivs, parentDiv) {
+export default function appendAllChildren(arrayOfChildrenDivs, parentDiv) {
   for (let i = 0; i < arrayOfChildrenDivs.length; i += 1) {
     parentDiv.appendChild(arrayOfChildrenDivs[i]);
   }
