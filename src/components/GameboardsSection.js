@@ -105,7 +105,21 @@ function createGameSection([player, enemy]) {
   );
   document.body.appendChild(gameContainer);
 }
-
+function endGame(playerObject) {
+  const header = document.querySelector('.game-over');
+  const enemyGameboard = document.querySelector(
+    '.computer-container > .battleship'
+  );
+  enemyGameboard.style.pointerEvents = 'none';
+  if (playerObject.getName().includes('Enemy')) {
+    header.textContent = 'You have lost :(';
+  } else {
+    header.textContent = 'Congratulations, You have won!';
+  }
+  header.style.color = 'black';
+}
 Pubsub.subscribe('Start Game', createGameSection);
 Pubsub.subscribe('Update enemy board', updateEnemyGameboard);
 Pubsub.subscribe('Update player board', updatePlayerGameboard);
+Pubsub.subscribe('Player has won', endGame);
+Pubsub.subscribe('Computer has won', endGame);

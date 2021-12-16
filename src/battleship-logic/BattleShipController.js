@@ -4,7 +4,7 @@ import '../components/PreGameSection';
 import '../components/GameboardsSection';
 
 export const humanPlayer = Player('Player');
-const computerPlayer = Player('Computer');
+const computerPlayer = Player('Enemy');
 function placeShip(arrayOfCoordinates) {
   humanPlayer.gameBoard.placeShip(...arrayOfCoordinates);
   Pubsub.publish('updatePreGameBattleShip', humanPlayer);
@@ -28,8 +28,15 @@ function startGame(name) {
 function receiveAttackFromPlayer([xCoordinate, yCoordinate]) {
   humanPlayer.attack([xCoordinate, yCoordinate], computerPlayer.gameBoard);
   Pubsub.publish('Update enemy board', [computerPlayer, humanPlayer]);
+  if (computerPlayer.gameBoard.allShipsAreSunk()) {
+    Pubsub.publish('Player has won', humanPlayer);
+    return;
+  }
   computerPlayer.randomAttack(humanPlayer.gameBoard);
   Pubsub.publish('Update player board', [humanPlayer, computerPlayer]);
+  if (humanPlayer.gameBoard.allShipsAreSunk()) {
+    Pubsub.publish('Computer has won', computerPlayer);
+  }
 }
 
 Pubsub.publish('loadPreGame', humanPlayer);
