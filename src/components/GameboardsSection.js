@@ -84,6 +84,12 @@ function updateEnemyGameboard([enemy, player]) {
   console.log(enemy, player);
   renderEnemyBattleShip(enemyBattleShip, enemy, player);
 }
+function updatePlayerGameboard([player, enemy]) {
+  const playerBattleShip = document.querySelector(
+    '.player-container > .battleship'
+  );
+  renderPlayerBattleShip(playerBattleShip, player, enemy);
+}
 function createGameSection([player, enemy]) {
   const gameContainer = document.createElement('div');
   gameContainer.classList.add('game-container');
@@ -99,5 +105,7 @@ function createGameSection([player, enemy]) {
   );
   document.body.appendChild(gameContainer);
 }
+
 Pubsub.subscribe('Start Game', createGameSection);
 Pubsub.subscribe('Update enemy board', updateEnemyGameboard);
+Pubsub.subscribe('Update player board', updatePlayerGameboard);

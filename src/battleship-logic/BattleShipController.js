@@ -28,6 +28,8 @@ function startGame(name) {
 function receiveAttackFromPlayer([xCoordinate, yCoordinate]) {
   humanPlayer.attack([xCoordinate, yCoordinate], computerPlayer.gameBoard);
   Pubsub.publish('Update enemy board', [computerPlayer, humanPlayer]);
+  computerPlayer.randomAttack(humanPlayer.gameBoard);
+  Pubsub.publish('Update player board', [humanPlayer, computerPlayer]);
 }
 
 Pubsub.publish('loadPreGame', humanPlayer);
