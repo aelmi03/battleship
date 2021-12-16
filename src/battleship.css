@@ -82,6 +82,9 @@ header {
   flex-flow: column nowrap;
   gap: 1.5rem;
 }
+.options > h2 {
+  user-select: none;
+}
 form {
   display: flex;
   flex-flow: row nowrap;
