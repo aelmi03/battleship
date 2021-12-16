@@ -3,8 +3,8 @@ import Pubsub from './Pubsub';
 import '../components/PreGameSection';
 import '../components/GameboardsSection';
 
-export const humanPlayer = Player('Player');
-const computerPlayer = Player('Enemy');
+export let humanPlayer = Player('Player');
+let computerPlayer = Player('Enemy');
 function placeShip(arrayOfCoordinates) {
   humanPlayer.gameBoard.placeShip(...arrayOfCoordinates);
   Pubsub.publish('updatePreGameBattleShip', humanPlayer);
@@ -38,8 +38,14 @@ function receiveAttackFromPlayer([xCoordinate, yCoordinate]) {
     Pubsub.publish('Computer has won', computerPlayer);
   }
 }
-
+function restartGame() {
+  Pubsub.publish('Destroy Gameboards Section');
+  humanPlayer = Player('Player');
+  computerPlayer = Player('Enemy');
+  Pubsub.publish('loadPreGame', humanPlayer);
+}
 Pubsub.publish('loadPreGame', humanPlayer);
 Pubsub.subscribe('User placed valid ship coordinates', placeShip);
 Pubsub.subscribe('User clicked start game', startGame);
 Pubsub.subscribe('Enemy was attacked', receiveAttackFromPlayer);
+Pubsub.subscribe('User clicked restart game', restartGame);

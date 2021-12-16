@@ -186,6 +186,7 @@ function createNameAndStartGameComponents() {
 }
 
 function createPreGameComponents(player) {
+  console.log(player);
   const container = document.createElement('div');
   container.classList.add('pre-game-container');
   const battleBoardComponent = document.createElement('div');

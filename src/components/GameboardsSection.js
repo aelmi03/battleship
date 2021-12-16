@@ -90,6 +90,9 @@ function updatePlayerGameboard([player, enemy]) {
   );
   renderPlayerBattleShip(playerBattleShip, player, enemy);
 }
+function restartGame() {
+  Pubsub.publish('User clicked restart game');
+}
 function createGameSection([player, enemy]) {
   const gameContainer = document.createElement('div');
   gameContainer.classList.add('game-container');
@@ -98,6 +101,7 @@ function createGameSection([player, enemy]) {
   const rematchButton = document.createElement('button');
   rematchButton.classList.add('rematch-button');
   rematchButton.textContent = 'Rematch';
+  rematchButton.addEventListener('click', restartGame);
   const battleShipsContainer = createBattleShipsContainer(player, enemy);
   appendAllChildren(
     [gameOverHeader, rematchButton, battleShipsContainer],
@@ -118,8 +122,14 @@ function endGame(playerObject) {
   }
   header.style.color = 'black';
 }
+function destroyGameboards() {
+  const gameContainer = document.querySelector('.game-container');
+  gameContainer.textContent = '';
+  document.body.removeChild(gameContainer);
+}
 Pubsub.subscribe('Start Game', createGameSection);
 Pubsub.subscribe('Update enemy board', updateEnemyGameboard);
 Pubsub.subscribe('Update player board', updatePlayerGameboard);
 Pubsub.subscribe('Player has won', endGame);
 Pubsub.subscribe('Computer has won', endGame);
+Pubsub.subscribe('Destroy Gameboards Section', destroyGameboards);
