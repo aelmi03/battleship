@@ -25,7 +25,12 @@ function startGame(name) {
   setUpEnemyShip();
   Pubsub.publish('Start Game', [humanPlayer, computerPlayer]);
 }
+function receiveAttackFromPlayer([xCoordinate, yCoordinate]) {
+  humanPlayer.attack([xCoordinate, yCoordinate], computerPlayer.gameBoard);
+  Pubsub.publish('Update enemy board', [computerPlayer, humanPlayer]);
+}
 
 Pubsub.publish('loadPreGame', humanPlayer);
 Pubsub.subscribe('User placed valid ship coordinates', placeShip);
 Pubsub.subscribe('User clicked start game', startGame);
+Pubsub.subscribe('Enemy was attacked', receiveAttackFromPlayer);
