@@ -112,7 +112,7 @@ input {
   color: white;
   font-size: 1.2rem;
   border-radius: 5px;
-  padding: 0.5rem;
+  padding: 0.5rem 0.7rem;
   font-family: 'Fredoka One', cursive;
 }
 button {
@@ -152,7 +152,6 @@ label {
 }
 .rematch-button {
   margin-top: 1rem;
-  width: 10rem;
 }
 
 .computer-container,
@@ -178,4 +177,121 @@ label {
   color: white;
   font-size: 1.2rem;
   font-family: 'Bungee', cursive;
+}
+@media only screen and (min-width: 540px) {
+  .battleship {
+    grid-auto-rows: 25px;
+    width: 250px;
+  }
+  .ship-position {
+    width: 25px;
+    height: 25px;
+  }
+
+  .ships-to-place {
+    width: 13rem;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .battleship {
+    grid-auto-rows: 30px;
+    width: 300px;
+  }
+  .ship-position {
+    width: 30px;
+    height: 30px;
+  }
+
+  .ships-to-place {
+    width: 16rem;
+  }
+  body {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+  }
+
+  header {
+    font-size: 3rem;
+  }
+  input {
+    font-size: 1.6rem;
+  }
+  .pre-game-container {
+    gap: 2rem;
+  }
+  .switch-direction {
+    font-size: 1.4rem;
+  }
+  .start-game,
+  .rematch-button {
+    font-size: 2rem;
+    padding: 0.9rem 1.2rem;
+  }
+  label {
+    font-size: 1.5rem;
+  }
+  .options > h2 {
+    font-size: 1.8rem;
+  }
+
+  .game-over {
+    font-size: 1.8rem;
+  }
+  .computer-container > h2,
+  .player-container > h2 {
+    font-size: 1.7rem;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .battleship {
+    grid-auto-rows: 40px;
+    width: 400px;
+  }
+  .ship-position {
+    width: 40px;
+    height: 40px;
+  }
+
+  .ships-to-place {
+    width: 18rem;
+  }
+  body {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+  }
+
+  header {
+    font-size: 3.3rem;
+  }
+
+  .pre-game-container {
+    gap: 2.2rem;
+  }
+  .switch-direction {
+    font-size: 2rem;
+  }
+  .start-game,
+  .rematch-button {
+    font-size: 2.2rem;
+  }
+  label {
+    font-size: 2.1rem;
+  }
+  .options > h2 {
+    font-size: 2rem;
+  }
+
+  .game-over {
+    font-size: 2rem;
+  }
+  .computer-container > h2,
+  .player-container > h2 {
+    font-size: 1.9rem;
+  }
+  .battleships-container {
+    justify-content: center;
+    gap: 4rem;
+  }
 }
