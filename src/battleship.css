@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Fredoka+One&family=Moo+Lah+Lah&family=Permanent+Marker&family=Press+Start+2P&display=swap');
 *,
 *::before,
 *::after {
@@ -14,6 +15,7 @@ header {
   justify-content: center;
   padding: 2rem;
   font-size: 2.2rem;
+  font-family: 'Press Start 2P', cursive;
   color: rgb(0, 183, 255);
   background-color: black;
 }
@@ -44,6 +46,7 @@ header {
   gap: 2rem;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 .switch-direction {
   background-color: white;
@@ -51,6 +54,7 @@ header {
   padding: 0.5rem;
   font-size: 1.05rem;
   font-weight: bold;
+  font-family: 'Fredoka One', cursive;
 }
 
 .ships-to-place {
@@ -85,18 +89,23 @@ header {
 }
 .options > h2 {
   color: white;
+  font-family: 'Permanent Marker', cursive;
 }
 form {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-flow: row nowrap;
   gap: 0.5rem;
-  padding: 0.5rem;
-  font-size: 1rem;
 }
 label[for='player-name'] {
   color: White;
+  font-family: 'Fredoka One', cursive;
 }
-
+input {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1rem;
+}
 .start-game,
 .rematch-button {
   background-color: rgb(0, 183, 255);
@@ -104,6 +113,7 @@ label[for='player-name'] {
   font-size: 1.2rem;
   border-radius: 5px;
   padding: 0.5rem;
+  font-family: 'Fredoka One', cursive;
 }
 button {
   outline: none;
@@ -158,12 +168,14 @@ label {
 .computer-container > h2,
 .player-container > h2 {
   color: white;
+  font-family: 'Permanent Marker', cursive;
 }
 .player-container {
   pointer-events: none;
 }
 
 .game-over {
-  color: black;
-  font-size: 1.4rem;
+  color: white;
+  font-size: 1.2rem;
+  font-family: 'Bungee', cursive;
 }

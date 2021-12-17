@@ -156,7 +156,7 @@ function createFormElement() {
   });
   const label = document.createElement('label');
   label.setAttribute('for', 'player-name');
-  label.textContent = 'Name:';
+  label.textContent = 'Name :';
   const input = document.createElement('input');
   input.setAttribute('type', 'text');
   input.setAttribute('name', 'player-name');
