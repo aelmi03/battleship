@@ -24,11 +24,11 @@ function renderPlayerBattleShip(battleShipDiv, player, enemy) {
       const battleShipSpot = document.createElement('div');
       battleShipSpot.classList.add('battleship-spot');
       if (player.gameBoard.coordinates[i][j] && enemy.hasHit(i, j)) {
-        battleShipSpot.style.background = 'red';
+        battleShipSpot.style.background = 'rgb(255, 60, 0)';
       } else if (player.gameBoard.coordinates[i][j]) {
-        battleShipSpot.style.background = 'orange';
+        battleShipSpot.style.background = 'rgb(0, 183, 255)';
       } else if (enemy.hasHit(i, j)) {
-        battleShipSpot.style.background = 'green';
+        battleShipSpot.style.background = 'rgb(0, 255, 64)';
       }
       battleShipDiv.appendChild(battleShipSpot);
     }
@@ -49,9 +49,9 @@ function renderEnemyBattleShip(battleShipDiv, enemy, player) {
       battleShipSpot.setAttribute('x-position', `${i}`);
       battleShipSpot.setAttribute('y-position', `${j}`);
       if (enemy.gameBoard.coordinates[i][j] && player.hasHit(i, j)) {
-        battleShipSpot.style.background = 'red';
+        battleShipSpot.style.background = 'rgb(255, 60, 0)';
       } else if (player.hasHit(i, j)) {
-        battleShipSpot.style.background = 'green';
+        battleShipSpot.style.background = 'rgb(0, 255, 64)';
       } else {
         battleShipSpot.addEventListener('click', receivePlayerAttack);
       }
@@ -120,7 +120,7 @@ function endGame(playerObject) {
   } else {
     header.textContent = 'Congratulations, You have won!';
   }
-  header.style.color = 'black';
+  header.style.color = 'white';
 }
 function destroyGameboards() {
   const gameContainer = document.querySelector('.game-container');

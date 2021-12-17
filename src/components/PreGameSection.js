@@ -83,7 +83,7 @@ function createPreGameBattleBoard(player, battleShipDiv) {
       battleShipCoordinate.setAttribute('x-position', i);
       battleShipCoordinate.setAttribute('y-position', j);
       if (player.gameBoard.coordinates[i][j]) {
-        battleShipCoordinate.style.background = 'orange';
+        battleShipCoordinate.style.background = 'rgb(0, 183, 255)';
       }
       battleShipDiv.appendChild(battleShipCoordinate);
     }
