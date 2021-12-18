@@ -32,7 +32,7 @@ function receiveAttackFromPlayer([xCoordinate, yCoordinate]) {
     Pubsub.publish('Player has won', humanPlayer);
     return;
   }
-  computerPlayer.randomAttack(humanPlayer.gameBoard);
+  computerPlayer.computerAttack(humanPlayer.gameBoard);
   Pubsub.publish('Update player board', [humanPlayer, computerPlayer]);
   if (humanPlayer.gameBoard.allShipsAreSunk()) {
     Pubsub.publish('Computer has won', computerPlayer);

@@ -42,7 +42,7 @@ describe('Player', () => {
     secondPlayer.gameBoard.placeShip([3, 7], [3, 8], [3, 9]);
     secondPlayer.gameBoard.printShipToConsole();
     for (let i = 0; i < 100; i += 1) {
-      firstPlayer.randomAttack(secondPlayer.gameBoard);
+      firstPlayer.computerAttack(secondPlayer.gameBoard);
     }
     expect(secondPlayer.gameBoard.allShipsAreSunk()).toBe(true);
   });
