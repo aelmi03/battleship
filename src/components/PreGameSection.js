@@ -177,6 +177,7 @@ function createNameAndStartGameComponents() {
   const startGameContainer = document.createElement('div');
   startGameContainer.classList.add('start-game-container');
   const form = createFormElement();
+  form.addEventListener('submit', startGame);
   const startButton = document.createElement('button');
   startButton.classList.add('start-game');
   startButton.textContent = 'Start Game!';

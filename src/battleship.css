@@ -49,12 +49,35 @@ header {
   text-align: center;
 }
 .switch-direction {
+  position: relative;
   background-color: white;
-  color: black;
-  padding: 0.5rem;
+  color: rgb(253, 143, 0);
+  padding: 0.8rem;
+  border-radius: 5px;
   font-size: 1.05rem;
   font-weight: bold;
   font-family: 'Fredoka One', cursive;
+  transition: color 0.35s ease-in-out;
+  z-index: 0;
+}
+.switch-direction:hover {
+  color: white;
+}
+.switch-direction::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: scale(0);
+  background-color: rgb(253, 143, 0);
+  transition: transform 0.3s ease-in-out;
+  border-radius: 5px;
+  z-index: -1;
+}
+.switch-direction:hover::before {
+  transform: scale(1);
 }
 
 .ships-to-place {
@@ -99,7 +122,7 @@ form {
   gap: 0.5rem;
 }
 label[for='player-name'] {
-  color: White;
+  color: white;
   font-family: 'Fredoka One', cursive;
 }
 input {
@@ -108,13 +131,42 @@ input {
 }
 .start-game,
 .rematch-button {
+  position: relative;
   background-color: rgb(0, 183, 255);
   color: white;
   font-size: 1.2rem;
   border-radius: 5px;
   padding: 0.5rem 0.7rem;
   font-family: 'Fredoka One', cursive;
+  border-radius: 5px;
+  z-index: 0;
+  transition: color 0.5s ease-in-out;
 }
+.start-game:hover,
+.rematch-button:hover {
+  color: black;
+}
+.start-game::before,
+.rematch-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  background-color: rgb(0, 255, 200);
+  border-radius: 5px;
+  z-index: -1;
+  transition: transform 0.5s ease-in-out;
+}
+
+.start-game:hover::before,
+.rematch-button:hover::before {
+  transform: scaleX(1);
+}
+
 button {
   outline: none;
   border: none;
@@ -125,7 +177,7 @@ h2 {
 }
 
 .allowed {
-  background-color: rgb(0, 255, 64);
+  background-color: rgb(0, 255, 200);
 }
 label {
   font-size: 1.3rem;
@@ -257,11 +309,9 @@ label {
     width: 18rem;
   }
   body {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
+    gap: 3.5rem;
+    margin-bottom: 1.3rem;
   }
-
   header {
     font-size: 3.3rem;
   }
