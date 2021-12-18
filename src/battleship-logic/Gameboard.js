@@ -156,7 +156,6 @@ export default function GameBoard(battleshipName) {
     for (let i = 0; i < length; i += 1) {
       shipCoordinates.push([firstCoordinate + i, secondCoordinate]);
     }
-    console.log(shipCoordinates);
     placeShip(...shipCoordinates);
   }
   function placeShipHorizontally([firstCoordinate, secondCoordinate], length) {
@@ -164,7 +163,6 @@ export default function GameBoard(battleshipName) {
     for (let i = 0; i < length; i += 1) {
       shipCoordinates.push([firstCoordinate, secondCoordinate + i]);
     }
-    console.log(shipCoordinates);
     placeShip(...shipCoordinates);
   }
   function placeShipRandomly(length) {

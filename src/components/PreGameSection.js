@@ -24,7 +24,6 @@ function markSpotsAsAvailable(coordinates) {
       `[x-position = "${coordinates[i][0]}"][y-position = "${coordinates[i][1]}"]`
     );
     battleBoardSpot.classList.add('allowed');
-    console.log(battleBoardSpot);
   }
 }
 function dragOverListener(e) {
@@ -39,7 +38,6 @@ function dragOverListener(e) {
     direction
   );
   if (humanPlayer.gameBoard.coordinatesAreAllowed(coordinates)) {
-    console.log(coordinates);
     markSpotsAsAvailable(coordinates);
   }
 }
@@ -68,7 +66,6 @@ function dragLeaveListener(e) {
   const allHighlightedSpots = document.querySelectorAll('.allowed');
   if (allHighlightedSpots.length === 0) return;
   allHighlightedSpots.forEach((spot) => spot.classList.remove('allowed'));
-  console.log('left a spot');
 }
 function createPreGameBattleBoard(player, battleShipDiv) {
   battleShipDiv.textContent = '';

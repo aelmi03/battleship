@@ -2,6 +2,8 @@
 
 Created a web application of the classic game known as Battleship to practice javascript testing
 
+[Live Demo](https://aelmi03.github.io/battleship/)
+
 ## Features
 
 - Place ships vertically or horizontally
@@ -16,5 +18,3 @@ Created a web application of the classic game known as Battleship to practice ja
 - HTML
 - CSS
 - Jest (for testing)
-
-[Live Demo](https://aelmi03.github.io/battleship/)

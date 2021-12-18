@@ -81,7 +81,6 @@ function updateEnemyGameboard([enemy, player]) {
   const enemyBattleShip = document.querySelector(
     '.computer-container > .battleship '
   );
-  console.log(enemy, player);
   renderEnemyBattleShip(enemyBattleShip, enemy, player);
 }
 function updatePlayerGameboard([player, enemy]) {
