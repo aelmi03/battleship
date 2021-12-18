@@ -18,6 +18,7 @@ header {
   font-family: 'Press Start 2P', cursive;
   color: rgb(0, 183, 255);
   background-color: black;
+  text-shadow: rgb(255, 255, 255) 2px 2px;
 }
 
 .battleship {
@@ -57,11 +58,13 @@ header {
   font-size: 1.05rem;
   font-weight: bold;
   font-family: 'Fredoka One', cursive;
-  transition: color 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+  text-shadow: 0 0 2px rgb(253, 143, 0);
   z-index: 0;
 }
 .switch-direction:hover {
   color: white;
+  text-shadow: 0 0 2px white;
 }
 .switch-direction::before {
   content: '';
@@ -113,6 +116,7 @@ header {
 .options > h2 {
   color: white;
   font-family: 'Permanent Marker', cursive;
+  text-shadow: 0 0 4px white;
 }
 form {
   display: flex;
@@ -124,6 +128,7 @@ form {
 label[for='player-name'] {
   color: white;
   font-family: 'Fredoka One', cursive;
+  text-shadow: 0 0 2px white;
 }
 input {
   font-family: 'Permanent Marker', cursive;
@@ -140,11 +145,13 @@ input {
   font-family: 'Fredoka One', cursive;
   border-radius: 5px;
   z-index: 0;
-  transition: color 0.5s ease-in-out;
+  text-shadow: 0 0 4px white;
+  transition: all 0.5s ease-in-out;
 }
 .start-game:hover,
 .rematch-button:hover {
   color: black;
+  text-shadow: 0 0 4px black;
 }
 .start-game::before,
 .rematch-button::before {
@@ -220,6 +227,7 @@ label {
 .player-container > h2 {
   color: white;
   font-family: 'Permanent Marker', cursive;
+  text-shadow: 0 0 3px white;
 }
 .player-container {
   pointer-events: none;
@@ -228,6 +236,7 @@ label {
 .game-over {
   color: white;
   font-size: 1.2rem;
+  text-shadow: 0 0 4px white;
   font-family: 'Bungee', cursive;
 }
 @media only screen and (min-width: 540px) {
